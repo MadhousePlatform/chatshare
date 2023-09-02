@@ -12,6 +12,11 @@ struct Handler {
 #[async_trait]
 impl EventHandler for Handler {
     async fn message(&self, ctx: Context, msg: Message) {
+        let channel_id = ChannelId(std::env::var("DISCORD_CHANNEL").unwrap().parse().unwrap());
+        if msg.channel_id != channel_id {
+            return;
+        }
+
         if msg.is_own(ctx.cache) {
             return;
         }
