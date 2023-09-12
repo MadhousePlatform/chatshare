@@ -1,7 +1,8 @@
 name: Build and Publish
 
 on:
-  push
+  push:
+    branches: ['main']
 
 env:
   REGISTRY: ghcr.io
