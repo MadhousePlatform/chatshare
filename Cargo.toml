@@ -9,7 +9,7 @@ edition = "2021"
 bollard = "0.14.0"
 dotenv = "0.15.0"
 regex = "1.9.4"
-reqwest = { version = "0.11.20", features = ["json"] }
+reqwest = { version = "0.11.20", features = ["json", "blocking"] }
 serde = { version = "1.0.188", features = ["derive"] }
 serenity = "0.11.6"
 tokio = { version = "1.32.0", features = ["full"] }
