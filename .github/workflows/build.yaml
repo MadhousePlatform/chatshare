@@ -8,7 +8,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  push_to_registry:
+  push-to-registry:
     runs-on: ubuntu-latest
 
     permissions:
