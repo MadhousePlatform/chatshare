@@ -1,5 +1,6 @@
 mod discord;
 mod docker;
+mod parsers;
 mod servers;
 
 use docker::ServerEventMessage;
@@ -16,7 +17,15 @@ async fn main() {
     match servers {
         Ok(servers) => {
             for s in servers {
-                tokio::spawn(docker::handle_server(s, tx.clone()));
+                let parser = match s.name.as_str() {
+                    "Resonant Rise 3" => parsers::rr3(),
+                    "Cobblemon" => parsers::cobblemon(),
+                    "Mechanical Mastery" => parsers::mechanical(),
+                    "All The Mods - Volcanoblock" => parsers::atm(),
+                    "All The Mods 9" => parsers::atm(),
+                    _ => parsers::vanilla(),
+                };
+                tokio::spawn(docker::handle_server(s, tx.clone(), parser));
             }
             tokio::spawn(discord::handle_connection(tx.clone()));
         }
